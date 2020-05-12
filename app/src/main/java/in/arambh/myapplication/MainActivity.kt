@@ -12,23 +12,20 @@ class MainActivity : AppCompatActivity() {
 
         var num : Int = 0
 
-       /* btnCount.setOnClickListener {
+        btnCount.setOnClickListener {
             num = num + 2
             txtCount.text = num.toString()
-        }*/
+        }
 
         val btnct = btnCount
 
-        var a = txtCount.text       // get text
+        //var a = txtCount.text       // get text
 
-        txtCount.text = "some text" // set text
+       // txtCount.text = "some text" // set text
 
-        btnct.setOnClickListener {
-           // num = num + 2
-            //txtCount.text = num.toString()
-
+       /* btnct.setOnClickListener {
             txtCount.text = "some text"
-        }
+        }*/
 
 
 
