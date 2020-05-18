@@ -66,4 +66,33 @@
         android:layout_height="wrap_content"
         android:text="Show Alert" />
 
+    <EditText
+        android:id="@+id/edtNameFirebase"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Enter name to store to database"
+        android:inputType="textPersonName" />
+    <Button
+        android:id="@+id/btnSavetoDB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save To Firestore" />
+
+    <TextView
+        android:id="@+id/txtFirebaseFetchName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="temp"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:layout_margin="5dp"/>
+
+    <Button
+        android:onClick="fetchdb"
+        android:id="@+id/btFetchData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fetch From Database" />
+
 </LinearLayout>

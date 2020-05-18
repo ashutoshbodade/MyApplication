@@ -6,15 +6,41 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.google.firebase.firestore.FirebaseFirestore
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     var counter : Int = 0
+    val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+
+        btnSavetoDB.setOnClickListener {
+
+
+
+
+            val users = hashMapOf(
+                "name" to edtNameFirebase.text.toString(),
+                "age" to 23
+            )
+
+            FirebaseFirestore.getInstance().collection("users")
+                .add(users as Map<String, Any>)
+                .addOnSuccessListener {
+                    Toasty.success(this,"added sucessfully" + it.id, Toast.LENGTH_LONG).show()
+                }
+                .addOnFailureListener {
+                    Toasty.error(this,"You got error",Toast.LENGTH_LONG).show()
+           }
+
+        }
+
 
     }
 
@@ -64,6 +90,16 @@ class MainActivity : AppCompatActivity() {
         // Set other dialog properties
         alertDialog.setCancelable(false)
         alertDialog.show()
+    }
+
+    fun fetchdb(view: View) {
+        db.collection("users").whereEqualTo("name", "nandini")
+            .get()
+            .addOnSuccessListener { documents ->
+
+                txtFirebaseFetchName.text = documents.size().toString()
+
+            }
     }
 
 }
