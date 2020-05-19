@@ -23,8 +23,31 @@ class MainActivity : AppCompatActivity() {
         btnSavetoDB.setOnClickListener {
 
 
+            val firebasedb = FirebaseFirestore.getInstance()
+
+            val product = hashMapOf(
+                "name" to "abc",
+                "price" to 549
+            )
+
+            firebasedb.collection("products")
+                .add(product as Map<String, Any>)
+                .addOnSuccessListener {
+                    Toasty.success(this,"add to db sucess", Toast.LENGTH_LONG).show()
+                }
+                .addOnFailureListener {
+                    Toasty.error(this,"add to db failed", Toast.LENGTH_LONG).show()
+                }
+                .addOnCompleteListener {
+
+                }
 
 
+
+            // if you know document id then call set() method
+            // if you don't know or want to store in random document call add() method
+
+/*
             val users = hashMapOf(
                 "name" to edtNameFirebase.text.toString(),
                 "age" to 23
@@ -38,7 +61,7 @@ class MainActivity : AppCompatActivity() {
                 .addOnFailureListener {
                     Toasty.error(this,"You got error",Toast.LENGTH_LONG).show()
            }
-
+*/
         }
 
 
@@ -93,13 +116,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun fetchdb(view: View) {
+
         db.collection("users").whereEqualTo("name", "nandini")
             .get()
             .addOnSuccessListener { documents ->
-
                 txtFirebaseFetchName.text = documents.size().toString()
-
             }
+
     }
 
 }
