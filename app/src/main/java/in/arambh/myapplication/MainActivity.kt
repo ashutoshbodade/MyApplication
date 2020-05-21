@@ -12,12 +12,12 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     var counter : Int = 0
+
     val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
 
 
         btnSavetoDB.setOnClickListener {
@@ -38,10 +38,9 @@ class MainActivity : AppCompatActivity() {
                 .addOnFailureListener {
                     Toasty.error(this,"add to db failed", Toast.LENGTH_LONG).show()
                 }
-                .addOnCompleteListener {
+                .addOnCompleteListener { e ->
 
                 }
-
 
 
             // if you know document id then call set() method
@@ -117,11 +116,24 @@ class MainActivity : AppCompatActivity() {
 
     fun fetchdb(view: View) {
 
-        db.collection("users").whereEqualTo("name", "nandini")
+
+        db.collection("users").document("user1")
+            .get()
+            .addOnSuccessListener { fetchdb ->
+
+                val name:String = fetchdb["name"] as String
+                val age:String= fetchdb["age"] as String
+
+                println("name $name, age $age")
+
+            }
+
+
+        /*db.collection("users").whereEqualTo("name", "nandini")
             .get()
             .addOnSuccessListener { documents ->
                 txtFirebaseFetchName.text = documents.size().toString()
-            }
+            }*/
 
     }
 
